@@ -1,0 +1,62 @@
+<h2>Buscador de endereço</h2>
+<div *ngIf="!this.address">
+  <input
+    type="text"
+    (blur)="findAddress()"
+    (keyup.enter)="findAddress()"
+    [value]="cep"
+    (input)="cep = getValue($event)"
+    maxlength="9"
+  />
+</div>
+<div *ngIf="this.errorMessage">
+  <p>{{ errorMessage }}</p>
+</div>
+<div *ngIf="this.address">
+  <h1>Resultado da pesquisa</h1>
+  <hr />
+  <table>
+    <tr>
+      <td><strong>Logradouro</strong></td>
+      <td>{{ address.logradouro }}</td>
+    </tr>
+    <tr>
+      <td><strong>Número</strong></td>
+      <td>
+        <input
+          type="number"
+          [value]="address.numero"
+          (input)="address.numero = getValue($event)"
+          maxlength="9"
+          min="0"
+        />
+      </td>
+    </tr>
+    <tr>
+      <td><strong>Complemento</strong></td>
+      <td>
+        <input
+          type="text"
+          [value]="address.complemento"
+          (input)="address.complemento = getValue($event)"
+          maxlength="9"
+          min="0"
+        />
+      </td>
+    </tr>
+    <tr>
+      <td><strong>Cidade</strong></td>
+      <td>{{ address.localidade }}</td>
+    </tr>
+    <tr>
+      <td><strong>Estado</strong></td>
+      <td>{{ address.uf }}</td>
+    </tr>
+    <tr>
+      <td><strong>CEP</strong></td>
+      <td>{{ address.cep }}</td>
+    </tr>
+  </table>
+  <hr />
+  <button type="button" (click)="resetValues()">Pesquisar novamente</button>
+</div>
